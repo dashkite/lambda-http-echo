@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create role [ dashkite-http-echo-ddwc347j ]
+Resources:
+  IAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: dashkite-http-echo-ddwc347j
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+                - edgelambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: dashkite-http-echo-ddwc347j-policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource:
+                  - >-
+                    arn:aws:logs:*:*:log-group:/aws/lambda/dashkite-http-echo-ddwc347j:*
+                  - >-
+                    arn:aws:logs:*:*:log-group:/aws/lambda/us-east-1.dashkite-http-echo-ddwc347j:*
+

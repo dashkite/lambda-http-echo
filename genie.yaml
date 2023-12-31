@@ -1,0 +1,16 @@
+coffee:
+  targets:
+    - node
+
+
+sky:
+
+  lambda:
+    - name: drn:lambda/dashkite/http-echo
+      path: src/index.coffee
+      url:
+        open: true
+        cors: true
+      configurations:
+        default:
+          timeout: 30 # seconds

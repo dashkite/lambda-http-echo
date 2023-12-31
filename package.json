@@ -1,0 +1,48 @@
+{
+  "name": "@dashkite/lambda-http-echo",
+  "version": "0.0.0",
+  "description": "Auto-reloading support for Web apps",
+  "keywords": [],
+  "homepage": "https://github.com/dashkite/lambda-http-echo#readme",
+  "bugs": {
+    "url": "https://github.com/dashkite/lambda-http-echo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashkite/lambda-http-echo.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "contributors": [
+    "Dan Yoder <dan@dashkite.com>",
+    "David Harper <david@dashkite.com>",
+    "Chand Rajendra-Nicolucci <chand@dashkite.com>"
+  ],
+  "exports": {
+    ".": {
+      "node": "./build/node/src/index.js"
+    }
+  },
+  "main": "build/node/src/index.js",
+  "files": [
+    "build/node/src"
+  ],
+  "scripts": {
+    "test": "genie test",
+    "build": "genie build"
+  },
+  "devDependencies": {
+    "@dashkite/amen": "^0.2.0",
+    "@dashkite/amen-console": "^0.0.2",
+    "@dashkite/assert": "^0.1.4",
+    "@dashkite/drn-sky": "link:../drn-sky",
+    "@dashkite/genie": "^0.7.3",
+    "@dashkite/genie-coffee": "link:../genie-coffee",
+    "@dashkite/genie-sky": "link:../genie-sky"
+  },
+  "dependencies": {
+    "@dashkite/bake": "^0.0.6",
+    "@dashkite/joy": "link:../joy",
+    "@dashkite/sky-lambda": "link:../sky-lambda",
+    "@dashkite/talos": "link:../talos"
+  }
+}
