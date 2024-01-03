@@ -1,4 +1,5 @@
 import * as Fn from "@dashkite/joy/function"
+import * as Obj from "@dashkite/joy/object"
 import { Machine, Sync, $end } from "@dashkite/talos"
 import { convert } from "@dashkite/bake"
 
@@ -13,8 +14,27 @@ Parse =
     talos.context.echo = 
       JSON.parse convert from: "safe-base64", to: "utf8", echo
 
+  target: ( talos ) ->
+    url = new URL talos.context.request.url
+    url.searchParams.delete "echo"
+    talos.context.$echo = 
+      path: url.pathname
+      query: url.search
+
 
 Response =
+  echoMetadata: ( talos ) ->
+    { $echo } = talos.context
+
+    talos.context.response.headers ?= {}
+    Obj.assign talos.context.response.headers,
+      "x-echo-path": [ $echo.path ]
+      "x-echo-query": [ $echo.query ]
+
+    if talos.context.response.content?.$echo == true
+      talos.context.response.content.$echo = $echo
+
+
   default: ( talos ) ->
     talos.context.response =
       description: "bad request"
@@ -24,7 +44,7 @@ Response =
   
   build: ( talos ) ->
     { echo } = talos.context
-    talos.context.response = { echo... }
+    talos.context.response = talos.context.echo
 
   options: ( talos ) ->
     { request } = talos.context
@@ -46,7 +66,8 @@ Response =
 
 machine = Machine.make
   start:
-    parse: true
+    parse:
+      run: Parse.target
   parse:
     parseEcho: Match.echo
     default:
@@ -72,7 +93,6 @@ machine = Machine.make
 
 
 echo = ( request ) ->
-  console.log { request }
   iterator = Sync.start machine, { request }
   talos = null
   for _talos from iterator
@@ -87,6 +107,7 @@ echo = ( request ) ->
     console.error new Error "echo engine finished without producing response"
     return description: "internal server error"
   
+  Response.echoMetadata talos
   talos.context.response
 
 
