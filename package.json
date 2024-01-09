@@ -37,12 +37,15 @@
     "@dashkite/drn-sky": "link:../drn-sky",
     "@dashkite/genie": "^0.7.3",
     "@dashkite/genie-coffee": "link:../genie-coffee",
-    "@dashkite/genie-sky": "link:../genie-sky"
+    "@dashkite/genie-sky": "link:../genie-sky",
+    "@dashkite/genie-yaml": "link:../genie-yaml"
   },
   "dependencies": {
     "@dashkite/bake": "^0.0.6",
     "@dashkite/joy": "link:../joy",
+    "@dashkite/runes": "link:../runes",
     "@dashkite/sky-lambda": "link:../sky-lambda",
-    "@dashkite/talos": "link:../talos"
+    "@dashkite/talos": "link:../talos",
+    "panda-confidential": "^3.1.2"
   }
 }

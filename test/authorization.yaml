@@ -1,0 +1,26 @@
+domain: foo.dashkite.io
+
+expires:
+  days: 30
+
+identity: alice@acme.org
+
+resolvers:
+
+  account:
+    action:
+      name: request
+      value: 
+        resource: 
+          name: account
+          bindings:
+            email: alice@acme.org
+
+grants:
+
+  - resources:
+      - happy rune
+    methods:
+      - get
+    bindings:
+      email: alice@acme.org

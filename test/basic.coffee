@@ -1,17 +1,19 @@
+import assert from "@dashkite/assert"
+import authorization from "./authorization"
+
 test = ( h ) ->
   [
     h.test "ok", ->
-      response = await h.request "get", "/",
+      response = await h.request "get", "/", {},
         description: "ok"
         content:
-          $echo: true
           hello: "world"
         headers:
           "content-type": [ "application/json" ]
 
-      h.assert.equal 200, response.status
+      assert.equal 200, response.status
       json = await response.json()
-      h.assert.equal "world", json.hello
+      assert.equal "world", json.hello
       
     h.test "unauthorized", ->
       content = 
@@ -20,19 +22,25 @@ test = ( h ) ->
       authenticate = "https://www.dashkite.com"
       path = "/bunch/of/ignored/stuff"
 
-      response = await h.request "get", path,
+      response = await h.request "get", path, {},
         description: "unauthorized"
         content: content
         headers:
           "content-type": [ "application/json" ]
           "WWW-Authenticate": [ "https://www.dashkite.com" ]
 
-      h.assert.equal 401, response.status
-      h.assert.equal authenticate, response.headers.get "www-authenticate"
-      h.assert.equal path, response.headers.get "x-echo-path"
+      assert.equal 401, response.status
+      assert.equal authenticate, response.headers.get "www-authenticate"
       json = await response.json()
-      h.assert.equal path, json.$echo.path
-      h.assert.equal content.message, json.message
+      assert.equal content.message, json.message
+
+    h.test "rune", ->
+      response = await h.rune "get", authorization
+
+      assert.equal 200, response.status
+      json = await response.json()
+      assert json.rune?
+      assert json.nonce?
 
   ]
 

@@ -12,7 +12,7 @@ Parse =
   echo: ( talos ) -> 
     { echo } = talos.context.request.query
     talos.context.echo = 
-      JSON.parse convert from: "safe-base64", to: "utf8", echo
+      JSON.parse convert from: "base64", to: "utf8", echo
 
   target: ( talos ) ->
     url = new URL talos.context.request.url
@@ -23,18 +23,6 @@ Parse =
 
 
 Response =
-  echoMetadata: ( talos ) ->
-    { $echo } = talos.context
-
-    talos.context.response.headers ?= {}
-    Obj.assign talos.context.response.headers,
-      "x-echo-path": [ $echo.path ]
-      "x-echo-query": [ $echo.query ]
-
-    if talos.context.response.content?.$echo == true
-      talos.context.response.content.$echo = $echo
-
-
   default: ( talos ) ->
     talos.context.response =
       description: "bad request"
@@ -107,7 +95,6 @@ echo = ( request ) ->
     console.error new Error "echo engine finished without producing response"
     return description: "internal server error"
   
-  Response.echoMetadata talos
   talos.context.response
 
 

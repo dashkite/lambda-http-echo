@@ -1,9 +1,8 @@
-import assert from "@dashkite/assert"
-import {test, success} from "@dashkite/amen"
+import { test, success } from "@dashkite/amen"
 import print from "@dashkite/amen-console"
-import { request } from "./helpers"
+import * as _h from "./helpers"
 
-h = { assert, test, request }
+h = { test, _h... }
 
 import basic from "./basic"
 

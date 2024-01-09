@@ -1,6 +1,6 @@
 import lambda from "@dashkite/sky-lambda/furl"
-import echo from "./echo"
+import dispatch from "./dispatch"
 
-handler = lambda echo
+handler = lambda dispatch
 
 export { handler }

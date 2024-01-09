@@ -2,6 +2,12 @@ coffee:
   targets:
     - node
 
+yaml:
+  targets:
+    node:
+      - preset: js
+        glob:
+          - "test/**/*.yaml"
 
 sky:
 
