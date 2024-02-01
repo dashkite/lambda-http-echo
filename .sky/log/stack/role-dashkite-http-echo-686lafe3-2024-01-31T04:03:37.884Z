@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create role [ dashkite-http-echo-ddwc347j ]
+Description: Create role [ dashkite-http-echo-686lafe3 ]
 Resources:
   IAMRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: dashkite-http-echo-ddwc347j
+      RoleName: dashkite-http-echo-686lafe3
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -16,7 +16,7 @@ Resources:
             Action:
               - sts:AssumeRole
       Policies:
-        - PolicyName: dashkite-http-echo-ddwc347j-policy
+        - PolicyName: dashkite-http-echo-686lafe3-policy
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
@@ -27,7 +27,7 @@ Resources:
                   - logs:PutLogEvents
                 Resource:
                   - >-
-                    arn:aws:logs:*:*:log-group:/aws/lambda/dashkite-http-echo-ddwc347j:*
+                    arn:aws:logs:*:*:log-group:/aws/lambda/dashkite-http-echo-686lafe3:*
                   - >-
-                    arn:aws:logs:*:*:log-group:/aws/lambda/us-east-1.dashkite-http-echo-ddwc347j:*
+                    arn:aws:logs:*:*:log-group:/aws/lambda/us-east-1.dashkite-http-echo-686lafe3:*
 
